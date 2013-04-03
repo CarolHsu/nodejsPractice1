@@ -1,16 +1,11 @@
-function route(pathname, response){
+function route(handle, pathname){
 	console.log("About to route a response for " + pathname );
-	// switch(pathname){
-	// 	case '/kitty':
-	// 	response.end("Hello kitty");
-	// 	break;
-	// 	case '/love':
-	// 	response.end("Hello spring");
-	// 	break;
-	// 	default:
-	// 	response.end("Hello world");
-	// 	break;		
-	// }
+	if (typeof handle[pathname] === 'function') {
+		return handle[pathname]();
+	} else{
+		console.log("No request handler found for " + pathname);
+		return "404 not found.";
+	};
 }
 
 exports.route = route;
